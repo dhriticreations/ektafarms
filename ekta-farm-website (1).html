@@ -1,0 +1,1471 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Ekta Farms – Aligarh's Premier Banquet & Event Venue</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --gold: #c9a84c;
+      --gold-light: #e8c97a;
+      --gold-pale: #f5e8c0;
+      --dark: #0d0a06;
+      --dark2: #1a1408;
+      --dark3: #261e0d;
+      --cream: #fdf6e8;
+      --text: #3a2e1a;
+      --muted: #8a7550;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Jost', sans-serif;
+      background: var(--dark);
+      color: var(--cream);
+      overflow-x: hidden;
+    }
+
+    /* ── CURSOR ── */
+    body { cursor: none; }
+    #cursor {
+      width: 10px; height: 10px;
+      background: var(--gold);
+      border-radius: 50%;
+      position: fixed; top: 0; left: 0;
+      pointer-events: none; z-index: 9999;
+      transform: translate(-50%,-50%);
+      transition: transform .1s, width .2s, height .2s, background .2s;
+      mix-blend-mode: difference;
+    }
+    #cursor-ring {
+      width: 36px; height: 36px;
+      border: 1px solid var(--gold);
+      border-radius: 50%;
+      position: fixed; top: 0; left: 0;
+      pointer-events: none; z-index: 9998;
+      transform: translate(-50%,-50%);
+      transition: transform .18s ease-out, width .2s, height .2s;
+      opacity: .6;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      padding: 22px 48px;
+      display: flex; justify-content: space-between; align-items: center;
+      background: linear-gradient(to bottom, rgba(13,10,6,.95) 0%, transparent 100%);
+      backdrop-filter: blur(0px);
+      transition: background .3s, backdrop-filter .3s;
+    }
+    nav.scrolled {
+      background: rgba(13,10,6,.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(201,168,76,.15);
+    }
+    .nav-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.6rem; font-weight: 600; letter-spacing: .08em;
+      color: var(--gold);
+      text-decoration: none;
+    }
+    .nav-logo span { font-style: italic; font-weight: 300; color: var(--cream); }
+    .nav-links { display: flex; gap: 36px; list-style: none; }
+    .nav-links a {
+      font-size: .78rem; letter-spacing: .18em; text-transform: uppercase;
+      color: rgba(253,246,232,.7); text-decoration: none;
+      position: relative; padding-bottom: 3px;
+      transition: color .2s;
+    }
+    .nav-links a::after {
+      content: ''; position: absolute; bottom: 0; left: 0;
+      width: 0; height: 1px; background: var(--gold);
+      transition: width .3s;
+    }
+    .nav-links a:hover { color: var(--gold-light); }
+    .nav-links a:hover::after { width: 100%; }
+    .nav-cta {
+      padding: 10px 26px;
+      border: 1px solid var(--gold);
+      color: var(--gold) !important;
+      font-size: .78rem !important;
+      letter-spacing: .18em;
+      transition: background .2s, color .2s !important;
+    }
+    .nav-cta:hover { background: var(--gold) !important; color: var(--dark) !important; }
+    .nav-cta::after { display: none !important; }
+
+    /* ── HERO ── */
+    #hero {
+      min-height: 100vh;
+      position: relative;
+      display: flex; flex-direction: column;
+      justify-content: center; align-items: center;
+      text-align: center;
+      overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute; inset: 0;
+      background: 
+        radial-gradient(ellipse 80% 60% at 50% 40%, rgba(201,168,76,.07) 0%, transparent 65%),
+        url('https://images.unsplash.com/photo-1519167758481-83f550bb49b3?w=1800&q=80') center/cover no-repeat;
+      filter: brightness(.35);
+      transform: scale(1.04);
+      animation: heroZoom 14s ease-in-out infinite alternate;
+    }
+    @keyframes heroZoom { from { transform: scale(1.04); } to { transform: scale(1.0); } }
+    .hero-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to bottom, rgba(13,10,6,.15) 0%, rgba(13,10,6,.4) 60%, rgba(13,10,6,1) 100%);
+    }
+    .hero-content { position: relative; z-index: 2; padding: 0 24px; }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 10px;
+      border: 1px solid rgba(201,168,76,.4);
+      padding: 7px 20px; border-radius: 40px;
+      font-size: .7rem; letter-spacing: .22em; text-transform: uppercase;
+      color: var(--gold-light);
+      margin-bottom: 32px;
+      animation: fadeUp .8s .2s both;
+    }
+    .hero-badge::before, .hero-badge::after {
+      content: '◆'; font-size: .5rem; color: var(--gold);
+    }
+    .hero-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(3.2rem, 9vw, 8rem);
+      font-weight: 300; line-height: 1.0;
+      letter-spacing: .03em;
+      animation: fadeUp .9s .35s both;
+    }
+    .hero-title em {
+      font-style: italic; color: var(--gold);
+      display: block; font-size: 1.08em;
+    }
+    .hero-subtitle {
+      margin-top: 18px;
+      font-size: clamp(.85rem, 1.5vw, 1rem);
+      letter-spacing: .22em; text-transform: uppercase;
+      color: rgba(253,246,232,.6);
+      animation: fadeUp .9s .5s both;
+    }
+    .hero-divider {
+      margin: 32px auto;
+      width: 80px; height: 1px;
+      background: linear-gradient(to right, transparent, var(--gold), transparent);
+      animation: fadeUp .9s .6s both;
+    }
+    .hero-desc {
+      max-width: 480px; margin: 0 auto 40px;
+      font-size: .95rem; line-height: 1.8;
+      color: rgba(253,246,232,.7);
+      animation: fadeUp .9s .7s both;
+    }
+    .hero-btns {
+      display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;
+      animation: fadeUp .9s .85s both;
+    }
+    .btn-primary {
+      padding: 14px 36px;
+      background: var(--gold);
+      color: var(--dark);
+      font-family: 'Jost', sans-serif;
+      font-size: .8rem; font-weight: 600;
+      letter-spacing: .18em; text-transform: uppercase;
+      text-decoration: none;
+      transition: background .2s, transform .2s;
+      position: relative; overflow: hidden;
+    }
+    .btn-primary::after {
+      content: ''; position: absolute; inset: 0;
+      background: rgba(255,255,255,.15);
+      transform: translateX(-100%);
+      transition: transform .3s;
+    }
+    .btn-primary:hover::after { transform: translateX(0); }
+    .btn-outline {
+      padding: 14px 36px;
+      border: 1px solid rgba(201,168,76,.5);
+      color: var(--gold-light);
+      font-family: 'Jost', sans-serif;
+      font-size: .8rem; font-weight: 500;
+      letter-spacing: .18em; text-transform: uppercase;
+      text-decoration: none;
+      transition: border-color .2s, background .2s, color .2s;
+    }
+    .btn-outline:hover {
+      border-color: var(--gold);
+      background: rgba(201,168,76,.08);
+      color: var(--gold);
+    }
+    .hero-scroll {
+      position: absolute; bottom: 36px; left: 50%; transform: translateX(-50%);
+      display: flex; flex-direction: column; align-items: center; gap: 8px;
+      animation: fadeUp .9s 1.1s both;
+      z-index: 2;
+    }
+    .hero-scroll span {
+      font-size: .65rem; letter-spacing: .2em; text-transform: uppercase;
+      color: rgba(253,246,232,.4);
+    }
+    .scroll-line {
+      width: 1px; height: 48px;
+      background: linear-gradient(to bottom, var(--gold), transparent);
+      animation: scrollPulse 1.8s ease-in-out infinite;
+    }
+    @keyframes scrollPulse { 0%,100%{opacity:.3;transform:scaleY(1)} 50%{opacity:1;transform:scaleY(1.1)} }
+
+    /* ── SECTION BASE ── */
+    section { padding: 100px 48px; }
+    .section-tag {
+      font-size: .68rem; letter-spacing: .28em; text-transform: uppercase;
+      color: var(--gold);
+      display: flex; align-items: center; gap: 12px;
+      margin-bottom: 14px;
+    }
+    .section-tag::before {
+      content: ''; width: 30px; height: 1px; background: var(--gold);
+    }
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 5vw, 3.8rem);
+      font-weight: 300; line-height: 1.1;
+    }
+    .section-title em { font-style: italic; color: var(--gold); }
+    .divider-gold {
+      margin: 24px 0 36px;
+      width: 60px; height: 1px;
+      background: linear-gradient(to right, var(--gold), transparent);
+    }
+
+    /* ── ABOUT ── */
+    #about {
+      background: var(--dark2);
+      position: relative; overflow: hidden;
+    }
+    #about::before {
+      content: 'EKTA';
+      position: absolute; right: -2%; top: 50%; transform: translateY(-50%);
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 18vw; font-weight: 600; color: rgba(201,168,76,.03);
+      pointer-events: none; user-select: none; line-height: 1;
+    }
+    .about-grid {
+      max-width: 1200px; margin: 0 auto;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center;
+    }
+    .about-img-wrap {
+      position: relative;
+    }
+    .about-img-wrap img {
+      width: 100%; aspect-ratio: 3/4; object-fit: cover;
+      display: block;
+    }
+    .about-img-wrap::before {
+      content: '';
+      position: absolute; inset: -12px 12px 12px -12px;
+      border: 1px solid rgba(201,168,76,.25);
+      z-index: -1;
+    }
+    .about-img-wrap .img-badge {
+      position: absolute; bottom: -18px; right: -18px;
+      width: 110px; height: 110px;
+      background: var(--gold);
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      color: var(--dark);
+    }
+    .img-badge .num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.4rem; font-weight: 600; line-height: 1;
+    }
+    .img-badge .lbl {
+      font-size: .62rem; letter-spacing: .1em; text-transform: uppercase;
+      text-align: center; line-height: 1.3;
+    }
+    .about-text { position: relative; z-index: 1; }
+    .about-text p {
+      font-size: .97rem; line-height: 1.9;
+      color: rgba(253,246,232,.72);
+      margin-bottom: 18px;
+    }
+    .about-stats {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 24px; margin-top: 40px;
+    }
+    .stat-box {
+      padding: 20px 16px;
+      border: 1px solid rgba(201,168,76,.18);
+      text-align: center;
+    }
+    .stat-box .val {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.2rem; color: var(--gold); font-weight: 600;
+    }
+    .stat-box .key {
+      font-size: .68rem; letter-spacing: .14em; text-transform: uppercase;
+      color: rgba(253,246,232,.5); margin-top: 4px;
+    }
+
+    /* ── EVENTS ── */
+    #events { background: var(--dark3); }
+    .events-intro { max-width: 1200px; margin: 0 auto 56px; }
+    .events-grid {
+      max-width: 1200px; margin: 0 auto;
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px;
+    }
+    .event-card {
+      position: relative; overflow: hidden;
+      aspect-ratio: 3/4;
+      cursor: pointer;
+    }
+    .event-card img {
+      width: 100%; height: 100%; object-fit: cover;
+      transition: transform .6s ease;
+    }
+    .event-card:hover img { transform: scale(1.07); }
+    .event-card .card-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(13,10,6,.9) 0%, rgba(13,10,6,.1) 60%);
+    }
+    .event-card:hover .card-overlay {
+      background: linear-gradient(to top, rgba(13,10,6,.95) 0%, rgba(13,10,6,.45) 100%);
+    }
+    .card-content {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      padding: 28px 24px;
+    }
+    .card-icon {
+      font-size: 1.8rem; margin-bottom: 10px;
+      transform: translateY(6px);
+      opacity: .85;
+    }
+    .card-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem; font-weight: 400;
+      color: var(--cream); line-height: 1.2;
+    }
+    .card-desc {
+      font-size: .8rem; line-height: 1.6;
+      color: rgba(253,246,232,.6);
+      margin-top: 8px;
+      max-height: 0; overflow: hidden;
+      transition: max-height .4s ease, opacity .4s;
+      opacity: 0;
+    }
+    .event-card:hover .card-desc { max-height: 80px; opacity: 1; }
+    .card-line {
+      width: 0; height: 1px; background: var(--gold);
+      margin: 10px 0;
+      transition: width .4s .1s;
+    }
+    .event-card:hover .card-line { width: 40px; }
+
+    /* ── WALKTHROUGH / GALLERY ── */
+    #walkthrough {
+      background: var(--dark);
+      text-align: center;
+    }
+    .walk-header { max-width: 640px; margin: 0 auto 56px; }
+    .walk-header .section-tag { justify-content: center; }
+    .walk-header .section-tag::before { display: none; }
+    .walk-header .divider-gold { margin: 24px auto 36px; }
+
+    /* Instagram embed area */
+    .insta-notice {
+      max-width: 900px; margin: 0 auto 48px;
+      padding: 32px;
+      border: 1px solid rgba(201,168,76,.18);
+      background: rgba(201,168,76,.04);
+    }
+    .insta-notice p {
+      font-size: .9rem; color: rgba(253,246,232,.65); line-height: 1.8;
+    }
+    .insta-notice a {
+      color: var(--gold); text-decoration: none; font-weight: 500;
+    }
+    .insta-notice a:hover { text-decoration: underline; }
+
+    /* Gallery mosaic */
+    .gallery-mosaic {
+      max-width: 1200px; margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      grid-template-rows: auto;
+      gap: 3px;
+    }
+    .g-item { overflow: hidden; position: relative; }
+    .g-item img {
+      width: 100%; height: 100%; object-fit: cover;
+      transition: transform .5s ease;
+    }
+    .g-item:hover img { transform: scale(1.05); }
+    .g-item:nth-child(1) { grid-column: span 5; grid-row: span 2; min-height: 340px; }
+    .g-item:nth-child(2) { grid-column: span 4; min-height: 166px; }
+    .g-item:nth-child(3) { grid-column: span 3; min-height: 166px; }
+    .g-item:nth-child(4) { grid-column: span 4; min-height: 166px; }
+    .g-item:nth-child(5) { grid-column: span 3; min-height: 166px; }
+    .g-item:nth-child(6) { grid-column: span 4; min-height: 220px; }
+    .g-item:nth-child(7) { grid-column: span 4; min-height: 220px; }
+    .g-item:nth-child(8) { grid-column: span 4; min-height: 220px; }
+
+    .g-overlay {
+      position: absolute; inset: 0;
+      background: rgba(13,10,6,.3);
+      display: flex; align-items: center; justify-content: center;
+      opacity: 0; transition: opacity .3s;
+    }
+    .g-item:hover .g-overlay { opacity: 1; }
+    .g-overlay span {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.1rem; color: var(--gold-light);
+      letter-spacing: .12em;
+    }
+
+    /* ── VIDEO SECTION ── */
+    #video {
+      background: var(--dark2);
+      text-align: center;
+    }
+    .video-inner { max-width: 900px; margin: 0 auto; }
+    .video-inner .section-tag { justify-content: center; }
+    .video-inner .section-tag::before { display: none; }
+    .video-inner .divider-gold { margin: 24px auto 40px; }
+    .video-frame {
+      position: relative;
+      width: 100%; padding-top: 56.25%;
+      border: 1px solid rgba(201,168,76,.2);
+      overflow: hidden;
+    }
+    .video-frame iframe {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%;
+      border: none;
+    }
+    .video-frame .play-poster {
+      position: absolute; inset: 0;
+      background: url('https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?w=900&q=80') center/cover no-repeat;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer;
+      transition: opacity .4s;
+    }
+    .play-poster.hidden { opacity: 0; pointer-events: none; }
+    .play-btn {
+      width: 80px; height: 80px;
+      background: rgba(201,168,76,.9);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      transition: transform .2s, background .2s;
+    }
+    .play-poster:hover .play-btn { transform: scale(1.1); background: var(--gold); }
+    .play-btn::after {
+      content: '';
+      border-style: solid;
+      border-width: 14px 0 14px 24px;
+      border-color: transparent transparent transparent var(--dark);
+      margin-left: 6px;
+    }
+    .video-caption {
+      margin-top: 20px;
+      font-size: .82rem; letter-spacing: .1em;
+      color: rgba(253,246,232,.45);
+    }
+
+    /* ── PACKAGES ── */
+    #packages {
+      background: var(--dark3);
+    }
+    .packages-intro { max-width: 1200px; margin: 0 auto 56px; }
+    .packages-grid {
+      max-width: 1200px; margin: 0 auto;
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px;
+    }
+    .pkg-card {
+      padding: 44px 36px;
+      background: var(--dark2);
+      border: 1px solid rgba(201,168,76,.1);
+      position: relative; overflow: hidden;
+      transition: border-color .3s;
+    }
+    .pkg-card:hover { border-color: rgba(201,168,76,.4); }
+    .pkg-card.featured {
+      background: var(--dark);
+      border-color: var(--gold);
+    }
+    .pkg-featured-badge {
+      position: absolute; top: 0; right: 0;
+      background: var(--gold); color: var(--dark);
+      font-size: .62rem; letter-spacing: .18em; text-transform: uppercase;
+      padding: 6px 14px;
+      font-weight: 600;
+    }
+    .pkg-icon { font-size: 2rem; margin-bottom: 18px; }
+    .pkg-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.8rem; font-weight: 400; color: var(--cream);
+      margin-bottom: 6px;
+    }
+    .pkg-price {
+      font-size: .82rem; color: var(--gold);
+      letter-spacing: .1em; margin-bottom: 24px;
+    }
+    .pkg-divider {
+      width: 40px; height: 1px; background: rgba(201,168,76,.3);
+      margin-bottom: 24px;
+    }
+    .pkg-features { list-style: none; }
+    .pkg-features li {
+      font-size: .85rem; color: rgba(253,246,232,.65);
+      padding: 7px 0; border-bottom: 1px solid rgba(201,168,76,.07);
+      display: flex; align-items: center; gap: 10px;
+    }
+    .pkg-features li::before {
+      content: '◆'; font-size: .45rem; color: var(--gold); flex-shrink: 0;
+    }
+    .pkg-cta {
+      display: block;
+      margin-top: 32px; padding: 12px 0; text-align: center;
+      border: 1px solid rgba(201,168,76,.4);
+      color: var(--gold-light);
+      font-size: .75rem; letter-spacing: .18em; text-transform: uppercase;
+      text-decoration: none;
+      transition: background .2s, color .2s;
+    }
+    .pkg-cta:hover { background: var(--gold); color: var(--dark); border-color: var(--gold); }
+    .pkg-card.featured .pkg-cta { background: var(--gold); color: var(--dark); border-color: var(--gold); }
+
+    /* ── TESTIMONIALS ── */
+    #testimonials { background: var(--dark); }
+    .test-header { max-width: 1200px; margin: 0 auto 56px; }
+    .test-grid {
+      max-width: 1200px; margin: 0 auto;
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
+    }
+    .test-card {
+      padding: 36px 28px;
+      border: 1px solid rgba(201,168,76,.12);
+      background: var(--dark2);
+      position: relative;
+    }
+    .quote-mark {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 5rem; line-height: .6;
+      color: rgba(201,168,76,.15);
+      position: absolute; top: 20px; left: 22px;
+      pointer-events: none; user-select: none;
+    }
+    .test-text {
+      font-size: .88rem; line-height: 1.8;
+      color: rgba(253,246,232,.7);
+      margin-bottom: 24px;
+      font-style: italic;
+    }
+    .test-author { display: flex; align-items: center; gap: 12px; }
+    .test-avatar {
+      width: 42px; height: 42px;
+      background: var(--gold);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.1rem; color: var(--dark); font-weight: 600;
+    }
+    .test-name {
+      font-size: .82rem; font-weight: 500;
+      color: var(--cream);
+    }
+    .test-stars {
+      font-size: .72rem; color: var(--gold);
+      margin-top: 2px; letter-spacing: .05em;
+    }
+
+    /* ── CONTACT ── */
+    #contact {
+      background: var(--dark2);
+    }
+    .contact-wrap {
+      max-width: 1200px; margin: 0 auto;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start;
+    }
+    .contact-info .section-title { margin-bottom: 8px; }
+    .contact-info p {
+      font-size: .9rem; line-height: 1.8;
+      color: rgba(253,246,232,.65);
+      margin-bottom: 36px;
+    }
+    .contact-item {
+      display: flex; gap: 18px; align-items: flex-start;
+      margin-bottom: 24px;
+    }
+    .contact-icon {
+      width: 42px; height: 42px; flex-shrink: 0;
+      border: 1px solid rgba(201,168,76,.3);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.1rem;
+    }
+    .contact-label {
+      font-size: .68rem; letter-spacing: .18em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 4px;
+    }
+    .contact-val {
+      font-size: .9rem; color: var(--cream); line-height: 1.5;
+    }
+    .contact-val a { color: inherit; text-decoration: none; }
+    .contact-val a:hover { color: var(--gold); }
+    .social-row {
+      display: flex; gap: 14px; margin-top: 32px; flex-wrap: wrap;
+    }
+    .social-btn {
+      display: flex; align-items: center; gap: 8px;
+      padding: 10px 20px;
+      border: 1px solid rgba(201,168,76,.3);
+      color: rgba(253,246,232,.75);
+      font-size: .76rem; letter-spacing: .1em;
+      text-decoration: none;
+      transition: border-color .2s, background .2s, color .2s;
+    }
+    .social-btn:hover { border-color: var(--gold); color: var(--gold); background: rgba(201,168,76,.05); }
+
+    /* Form */
+    .contact-form { position: relative; }
+    .form-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.6rem; font-weight: 400; margin-bottom: 28px;
+      color: var(--cream);
+    }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 14px; }
+    .form-group { display: flex; flex-direction: column; gap: 7px; margin-bottom: 14px; }
+    .form-group label {
+      font-size: .68rem; letter-spacing: .18em; text-transform: uppercase;
+      color: var(--gold);
+    }
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      background: rgba(201,168,76,.04);
+      border: 1px solid rgba(201,168,76,.2);
+      color: var(--cream);
+      padding: 13px 16px;
+      font-family: 'Jost', sans-serif;
+      font-size: .88rem;
+      outline: none;
+      transition: border-color .2s;
+      width: 100%;
+    }
+    .form-group select option { background: var(--dark2); color: var(--cream); }
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus { border-color: var(--gold); }
+    .form-group textarea { resize: vertical; min-height: 100px; }
+    .form-submit {
+      width: 100%; padding: 15px;
+      background: var(--gold); color: var(--dark);
+      font-family: 'Jost', sans-serif;
+      font-size: .82rem; font-weight: 600;
+      letter-spacing: .18em; text-transform: uppercase;
+      border: none; cursor: pointer;
+      transition: background .2s, transform .15s;
+    }
+    .form-submit:hover { background: var(--gold-light); transform: translateY(-1px); }
+    .form-success {
+      display: none;
+      padding: 18px; margin-top: 14px;
+      background: rgba(201,168,76,.08);
+      border: 1px solid rgba(201,168,76,.3);
+      color: var(--gold-light);
+      font-size: .85rem; text-align: center;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--dark);
+      border-top: 1px solid rgba(201,168,76,.15);
+      padding: 56px 48px 32px;
+    }
+    .footer-top {
+      max-width: 1200px; margin: 0 auto 40px;
+      display: grid; grid-template-columns: 1.4fr 1fr 1fr; gap: 60px;
+    }
+    .footer-brand .nav-logo { font-size: 1.8rem; display: block; margin-bottom: 16px; }
+    .footer-brand p {
+      font-size: .83rem; line-height: 1.8;
+      color: rgba(253,246,232,.45); max-width: 280px;
+    }
+    .footer-col h4 {
+      font-size: .7rem; letter-spacing: .22em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 18px;
+    }
+    .footer-col ul { list-style: none; }
+    .footer-col ul li {
+      margin-bottom: 10px;
+    }
+    .footer-col ul li a {
+      font-size: .82rem; color: rgba(253,246,232,.5);
+      text-decoration: none;
+      transition: color .2s;
+    }
+    .footer-col ul li a:hover { color: var(--gold); }
+    .footer-bottom {
+      max-width: 1200px; margin: 0 auto;
+      padding-top: 28px; border-top: 1px solid rgba(201,168,76,.08);
+      display: flex; justify-content: space-between; align-items: center;
+      font-size: .72rem; color: rgba(253,246,232,.3);
+    }
+    .footer-bottom a { color: var(--gold); text-decoration: none; }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(28px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .reveal {
+      opacity: 0; transform: translateY(30px);
+      transition: opacity .7s ease, transform .7s ease;
+    }
+    .reveal.visible { opacity: 1; transform: none; }
+    .reveal-delay-1 { transition-delay: .1s; }
+    .reveal-delay-2 { transition-delay: .2s; }
+    .reveal-delay-3 { transition-delay: .3s; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      nav { padding: 18px 24px; }
+      .nav-links { display: none; }
+      section { padding: 70px 24px; }
+      .about-grid, .contact-wrap { grid-template-columns: 1fr; gap: 48px; }
+      .events-grid, .packages-grid { grid-template-columns: 1fr; }
+      .gallery-mosaic { grid-template-columns: repeat(6,1fr); }
+      .g-item:nth-child(1) { grid-column: span 6; min-height: 260px; }
+      .g-item:nth-child(2) { grid-column: span 3; }
+      .g-item:nth-child(3) { grid-column: span 3; }
+      .g-item:nth-child(4) { grid-column: span 3; }
+      .g-item:nth-child(5) { grid-column: span 3; }
+      .g-item:nth-child(6) { grid-column: span 2; }
+      .g-item:nth-child(7) { grid-column: span 2; }
+      .g-item:nth-child(8) { grid-column: span 2; }
+      .test-grid { grid-template-columns: 1fr; }
+      .footer-top { grid-template-columns: 1fr; gap: 36px; }
+      .footer-bottom { flex-direction: column; gap: 8px; text-align: center; }
+      .form-row { grid-template-columns: 1fr; }
+      .about-stats { grid-template-columns: 1fr 1fr; }
+    }
+
+    /* ── PHOTO UPLOADER ── */
+    .uploader-wrap { }
+    .uploader-box {
+      border: 2px dashed rgba(201,168,76,.3);
+      padding: 44px 24px;
+      text-align: center;
+      background: rgba(201,168,76,.03);
+      cursor: pointer;
+      transition: border-color .2s, background .2s;
+    }
+    .uploader-box:hover, .uploader-box.drag-over {
+      border-color: var(--gold);
+      background: rgba(201,168,76,.07);
+    }
+    .uploader-icon { font-size: 2.2rem; margin-bottom: 10px; }
+    .uploader-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.4rem; color: var(--cream); margin-bottom: 6px;
+    }
+    .uploader-sub { font-size: .82rem; color: rgba(253,246,232,.45); margin-bottom: 18px; }
+    .uploader-btn {
+      padding: 10px 28px;
+      background: var(--gold); color: var(--dark);
+      border: none; font-family: 'Jost', sans-serif;
+      font-size: .78rem; font-weight: 600;
+      letter-spacing: .14em; text-transform: uppercase;
+      cursor: pointer; transition: background .2s;
+    }
+    .uploader-btn:hover { background: var(--gold-light); }
+    .uploaded-preview {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+      gap: 8px; margin-top: 16px;
+    }
+    .uploaded-preview .prev-item {
+      position: relative; overflow: hidden; aspect-ratio: 1;
+    }
+    .uploaded-preview .prev-item img {
+      width: 100%; height: 100%; object-fit: cover; display: block;
+    }
+    .prev-item .prev-del {
+      position: absolute; top: 5px; right: 5px;
+      width: 22px; height: 22px;
+      background: rgba(13,10,6,.75);
+      color: var(--gold); border: none;
+      font-size: .85rem; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      border-radius: 50%;
+    }
+    .uploader-note {
+      font-size: .72rem; color: rgba(253,246,232,.3);
+      margin-top: 14px; line-height: 1.6;
+    }
+    .uploader-note code {
+      background: rgba(201,168,76,.12);
+      padding: 1px 5px; color: var(--gold-light);
+    }
+
+    /* ── INSTAGRAM FEED PLACEHOLDER ── */
+    .insta-feed-placeholder, .reel-placeholder {
+      border: 1px dashed rgba(201,168,76,.25);
+      background: rgba(201,168,76,.03);
+    }
+    .insta-placeholder-inner {
+      padding: 56px 24px; text-align: center;
+    }
+
+    /* ── MAP ── */
+    .map-wrap {
+      max-width: 1200px; margin: 0 auto;
+      margin-top: 70px;
+      border: 1px solid rgba(201,168,76,.18);
+      overflow: hidden;
+    }
+    .map-wrap iframe { width: 100%; height: 400px; display: block; filter: grayscale(.6) sepia(.3) brightness(.85); border: none; }
+  </style>
+</head>
+<body>
+
+<!-- Custom Cursor -->
+<div id="cursor"></div>
+<div id="cursor-ring"></div>
+
+<!-- NAV -->
+<nav id="mainNav">
+  <a href="#hero" class="nav-logo">Ekta <span>Farms</span></a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#events">Events</a></li>
+    <li><a href="#walkthrough">Gallery</a></li>
+    <li><a href="#packages">Packages</a></li>
+    <li><a href="#testimonials">Reviews</a></li>
+    <li><a href="#contact" class="nav-cta">Book Now</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div class="hero-badge">Aligarh's Premier Event Destination</div>
+    <h1 class="hero-title">
+      Ekta<br><em>Farms</em>
+    </h1>
+    <p class="hero-subtitle">Multiple Functions &nbsp;·&nbsp; One Destination</p>
+    <div class="hero-divider"></div>
+    <p class="hero-desc">
+      Newly renovated and reimagined — a breathtaking venue on Agra Road where every celebration becomes an unforgettable masterpiece.
+    </p>
+    <div class="hero-btns">
+      <a href="#contact" class="btn-primary">Book a Visit</a>
+      <a href="#walkthrough" class="btn-outline">View Walkthrough</a>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <span>Scroll</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-grid">
+    <div class="about-img-wrap reveal">
+      <img src="https://images.unsplash.com/photo-1561484930-998b6a7b22e8?w=700&q=80" alt="Ekta Farms Venue" loading="lazy"/>
+      <div class="img-badge">
+        <div class="num">2+</div>
+        <div class="lbl">Event<br>Spaces</div>
+      </div>
+    </div>
+    <div class="about-text reveal reveal-delay-2">
+      <p class="section-tag">Our Story</p>
+      <h2 class="section-title">Where Moments <em>Become<br>Memories</em></h2>
+      <div class="divider-gold"></div>
+      <p>Nestled on Agra Road, Aligarh, Ekta Farms is the city's most celebrated multi-function banquet destination. After a stunning renovation, the farm now boasts world-class facilities while retaining the warmth and grandeur that has made it a beloved venue for generations of families.</p>
+      <p>From lavish weddings and ring ceremonies to corporate events, birthday soirées and kitty parties — our professionally designed spaces adapt to every dream and occasion.</p>
+      <div class="about-stats">
+        <div class="stat-box">
+          <div class="val">800+</div>
+          <div class="key">Seated Guests</div>
+        </div>
+        <div class="stat-box">
+          <div class="val">1200+</div>
+          <div class="key">Floating Setup</div>
+        </div>
+        <div class="stat-box">
+          <div class="val">4.3★</div>
+          <div class="key">Rated Venue</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EVENTS -->
+<section id="events">
+  <div class="events-intro reveal">
+    <p class="section-tag">What We Host</p>
+    <h2 class="section-title">Every Occasion, <em>Perfectly<br>Crafted</em></h2>
+    <div class="divider-gold"></div>
+  </div>
+  <div class="events-grid">
+    <div class="event-card reveal">
+      <img src="https://images.unsplash.com/photo-1519741497674-611481863552?w=600&q=80" alt="Wedding" loading="lazy"/>
+      <div class="card-overlay"></div>
+      <div class="card-content">
+        <div class="card-icon">💍</div>
+        <div class="card-title">Wedding Ceremonies</div>
+        <div class="card-line"></div>
+        <div class="card-desc">Grand mandaps, decorated lawns, and impeccable hospitality for your perfect wedding day.</div>
+      </div>
+    </div>
+    <div class="event-card reveal reveal-delay-1">
+      <img src="https://images.unsplash.com/photo-1530103862676-de8c9debad1d?w=600&q=80" alt="Birthday" loading="lazy"/>
+      <div class="card-overlay"></div>
+      <div class="card-content">
+        <div class="card-icon">🎂</div>
+        <div class="card-title">Birthday & Celebrations</div>
+        <div class="card-line"></div>
+        <div class="card-desc">From milestone birthdays to joyful anniversaries — we set the stage for your happiest moments.</div>
+      </div>
+    </div>
+    <div class="event-card reveal reveal-delay-2">
+      <img src="https://images.unsplash.com/photo-1511578314322-379afb476865?w=600&q=80" alt="Corporate" loading="lazy"/>
+      <div class="card-overlay"></div>
+      <div class="card-content">
+        <div class="card-icon">💼</div>
+        <div class="card-title">Corporate Events</div>
+        <div class="card-line"></div>
+        <div class="card-desc">Professional setups for business meetings, conferences, product launches and team events.</div>
+      </div>
+    </div>
+    <div class="event-card reveal">
+      <img src="https://images.unsplash.com/photo-1469371670807-013ccf25f16a?w=600&q=80" alt="Ring Ceremony" loading="lazy"/>
+      <div class="card-overlay"></div>
+      <div class="card-content">
+        <div class="card-icon">💎</div>
+        <div class="card-title">Ring Ceremonies</div>
+        <div class="card-line"></div>
+        <div class="card-desc">Intimate and elegant settings that make the beginning of forever truly special.</div>
+      </div>
+    </div>
+    <div class="event-card reveal reveal-delay-1">
+      <img src="https://images.unsplash.com/photo-1470753937643-efeb931202a9?w=600&q=80" alt="Kitty Party" loading="lazy"/>
+      <div class="card-overlay"></div>
+      <div class="card-content">
+        <div class="card-icon">🌸</div>
+        <div class="card-title">Kitty & Social Parties</div>
+        <div class="card-line"></div>
+        <div class="card-desc">Vibrant, colourful setups for social gatherings, club programmes and ladies' parties.</div>
+      </div>
+    </div>
+    <div class="event-card reveal reveal-delay-2">
+      <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=600&q=80" alt="Catering" loading="lazy"/>
+      <div class="card-overlay"></div>
+      <div class="card-content">
+        <div class="card-icon">🍽️</div>
+        <div class="card-title">Catering & Cuisine</div>
+        <div class="card-line"></div>
+        <div class="card-desc">Veg & non-veg menus crafted with love — in-house and external catering both welcome.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WALKTHROUGH / GALLERY -->
+<section id="walkthrough">
+  <div class="walk-header reveal">
+    <p class="section-tag">Venue Walkthrough</p>
+    <h2 class="section-title">Step Inside <em>Ekta Farms</em></h2>
+    <div class="divider-gold"></div>
+    <p style="color:rgba(253,246,232,.6);font-size:.9rem;line-height:1.8;max-width:520px;margin:0 auto;">
+      Explore our newly renovated spaces — lush lawns, elegant banquet halls, and beautifully lit event areas awaiting your grandest celebrations.
+    </p>
+  </div>
+
+  <!-- ── PHOTO GALLERY (replace src with your own images) ── -->
+  <div class="gallery-mosaic" id="photoGallery">
+    <!-- 💡 HOW TO ADD YOUR OWN PHOTOS:
+         1. Create a folder named "images" next to this HTML file
+         2. Copy your farm photos into that folder
+         3. Replace each src below, e.g.: src="images/hall-main.jpg"
+         You can also drag & drop photos using the uploader below ↓ -->
+    <div class="g-item reveal">
+      <img src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=800&q=80" alt="Banquet Hall" loading="lazy" id="photo-1"/>
+      <div class="g-overlay"><span>Grand Hall</span></div>
+    </div>
+    <div class="g-item reveal reveal-delay-1">
+      <img src="https://images.unsplash.com/photo-1478146059778-26028b07395a?w=500&q=80" alt="Lawn" loading="lazy" id="photo-2"/>
+      <div class="g-overlay"><span>Open Lawn</span></div>
+    </div>
+    <div class="g-item reveal reveal-delay-2">
+      <img src="https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?w=400&q=80" alt="Decor" loading="lazy" id="photo-3"/>
+      <div class="g-overlay"><span>Décor</span></div>
+    </div>
+    <div class="g-item reveal reveal-delay-1">
+      <img src="https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?w=500&q=80" alt="Stage" loading="lazy" id="photo-4"/>
+      <div class="g-overlay"><span>Stage Setup</span></div>
+    </div>
+    <div class="g-item reveal reveal-delay-2">
+      <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&q=80" alt="Lights" loading="lazy" id="photo-5"/>
+      <div class="g-overlay"><span>Night Lights</span></div>
+    </div>
+    <div class="g-item reveal">
+      <img src="https://images.unsplash.com/photo-1528605248644-14dd04022da1?w=500&q=80" alt="Dining" loading="lazy" id="photo-6"/>
+      <div class="g-overlay"><span>Dining</span></div>
+    </div>
+    <div class="g-item reveal reveal-delay-1">
+      <img src="https://images.unsplash.com/photo-1587825140708-dfaf72ae4b04?w=500&q=80" alt="Entrance" loading="lazy" id="photo-7"/>
+      <div class="g-overlay"><span>Entrance</span></div>
+    </div>
+    <div class="g-item reveal reveal-delay-2">
+      <img src="https://images.unsplash.com/photo-1529543544282-ea669407fca3?w=500&q=80" alt="Wedding Setup" loading="lazy" id="photo-8"/>
+      <div class="g-overlay"><span>Wedding Setup</span></div>
+    </div>
+  </div>
+
+  <!-- ── DRAG & DROP UPLOADER ── -->
+  <div class="uploader-wrap reveal" style="max-width:1200px;margin:32px auto 0;">
+    <div class="uploader-box" id="dropZone">
+      <div class="uploader-icon">📁</div>
+      <div class="uploader-title">Drop Your Farm Photos Here</div>
+      <div class="uploader-sub">or click to browse from phone / computer</div>
+      <input type="file" id="fileInput" multiple accept="image/*" style="display:none"/>
+      <button class="uploader-btn" onclick="document.getElementById('fileInput').click()">Choose Photos</button>
+    </div>
+    <div class="uploaded-preview" id="uploadedPreview"></div>
+    <p class="uploader-note">⚠️ These previews are temporary (session only). To make them permanent, save photos in an <code>images/</code> folder and update the <code>src</code> attributes in the HTML.</p>
+  </div>
+
+  <!-- ── INSTAGRAM LIVE FEED ── -->
+  <div style="max-width:1200px;margin:64px auto 0;" class="reveal">
+    <div style="text-align:center;margin-bottom:32px;">
+      <p class="section-tag" style="justify-content:center;"><span style="width:0"></span>Live from Instagram</p>
+      <h3 style="font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:300;">
+        Latest from <em style="color:var(--gold);font-style:italic;">@ekta.farms</em>
+      </h3>
+      <div class="divider-gold" style="margin:16px auto 0;"></div>
+    </div>
+
+    <!-- ELFSIGHT INSTAGRAM FEED WIDGET -->
+    <!-- 📋 SETUP STEPS (5 minutes, free):
+         1. Go to https://elfsight.com/instagram-feed-widget/
+         2. Click "Create Widget" → sign up free
+         3. Connect your @ekta.farms Instagram account
+         4. Copy the embed code they give you
+         5. Replace the placeholder below with that code -->
+    <div class="insta-feed-placeholder" id="elfsightWidget">
+      <div class="insta-placeholder-inner">
+        <div style="font-size:2.5rem;margin-bottom:12px;">📸</div>
+        <div style="font-family:'Cormorant Garamond',serif;font-size:1.5rem;color:var(--gold);margin-bottom:10px;">Instagram Feed</div>
+        <p style="font-size:.85rem;color:rgba(253,246,232,.6);line-height:1.8;max-width:420px;margin:0 auto 20px;">
+          Your live Instagram posts from <strong style="color:var(--gold-light);">@ekta.farms</strong> will appear here automatically — decoration photos, event reels, renovation updates and more.
+        </p>
+        <a href="https://elfsight.com/instagram-feed-widget/" target="_blank" rel="noopener" class="btn-primary" style="display:inline-block;font-size:.75rem;">
+          Set Up Instagram Feed (Free) →
+        </a>
+        <p style="margin-top:14px;font-size:.72rem;color:rgba(253,246,232,.35);">
+          After setup, replace this block with your Elfsight embed code
+        </p>
+      </div>
+    </div>
+    <!-- PASTE YOUR ELFSIGHT CODE HERE AFTER SETUP ↑ -->
+
+    <div style="text-align:center;margin-top:28px;">
+      <a href="https://www.instagram.com/ekta.farms?igsh=bGNtZjJvZm5xdmp4" target="_blank" rel="noopener" class="btn-outline" style="display:inline-block;">
+        📷 &nbsp;Follow @ekta.farms on Instagram
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- VIDEO -->
+<section id="video">
+  <div class="video-inner">
+    <p class="section-tag">Farm Tour</p>
+    <h2 class="section-title">Watch the <em>Walkthrough</em></h2>
+    <div class="divider-gold"></div>
+
+    <!-- ── YOUTUBE VIDEO ── -->
+    <div style="margin-bottom:16px;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);opacity:.7;">▶ YouTube Walkthrough</div>
+    <div class="video-frame reveal" style="margin-bottom:48px;">
+      <iframe
+        id="ytVideo"
+        src=""
+        data-src="https://www.youtube.com/embed/OaNT7Vo9MRY?autoplay=1&rel=0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen
+        title="Ekta Farm, Aligarh Walkthrough">
+      </iframe>
+      <div class="play-poster" id="playPoster">
+        <div class="play-btn"></div>
+      </div>
+    </div>
+    <p class="video-caption" style="margin-bottom:56px;">Cinematic walkthrough of Ekta Farm, Aligarh · Agra Road</p>
+
+    <!-- ── INSTAGRAM REEL EMBED ── -->
+    <div style="margin-bottom:16px;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);opacity:.7;">📱 Instagram Reel</div>
+    <div class="reel-placeholder reveal" id="reelArea">
+      <div class="insta-placeholder-inner" style="padding:40px 24px;">
+        <div style="font-size:2rem;margin-bottom:10px;">🎬</div>
+        <div style="font-family:'Cormorant Garamond',serif;font-size:1.4rem;color:var(--gold);margin-bottom:8px;">Add an Instagram Reel</div>
+        <p style="font-size:.83rem;color:rgba(253,246,232,.6);line-height:1.7;max-width:380px;margin:0 auto 18px;">
+          Share the link to any Instagram Reel from <strong style="color:var(--gold-light);">@ekta.farms</strong> and it will be embedded here.
+        </p>
+        <div style="display:flex;gap:10px;max-width:440px;margin:0 auto;">
+          <input type="text" id="reelInput" placeholder="Paste Instagram Reel URL here..."
+            style="flex:1;padding:11px 14px;background:rgba(201,168,76,.06);border:1px solid rgba(201,168,76,.25);color:var(--cream);font-family:'Jost',sans-serif;font-size:.84rem;outline:none;"/>
+          <button onclick="embedReel()" style="padding:11px 20px;background:var(--gold);color:var(--dark);border:none;font-family:'Jost',sans-serif;font-size:.78rem;font-weight:600;letter-spacing:.1em;cursor:pointer;">Embed</button>
+        </div>
+        <p style="margin-top:10px;font-size:.7rem;color:rgba(253,246,232,.3);">e.g. https://www.instagram.com/reel/ABC123/</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PACKAGES -->
+<section id="packages">
+  <div class="packages-intro reveal">
+    <p class="section-tag">Venue Options</p>
+    <h2 class="section-title">Choose Your <em>Perfect Space</em></h2>
+    <div class="divider-gold"></div>
+  </div>
+  <div class="packages-grid">
+    <div class="pkg-card reveal">
+      <div class="pkg-icon">🏛️</div>
+      <div class="pkg-name">Banquet Hall</div>
+      <div class="pkg-price">₹800 – ₹900 Per Plate</div>
+      <div class="pkg-divider"></div>
+      <ul class="pkg-features">
+        <li>Capacity: 800 seated guests</li>
+        <li>800+ floating guests</li>
+        <li>Air-conditioned indoor space</li>
+        <li>Veg & non-veg cuisine</li>
+        <li>40 car + 80 bike parking</li>
+        <li>Dedicated event manager</li>
+      </ul>
+      <a href="#contact" class="pkg-cta">Enquire Now</a>
+    </div>
+    <div class="pkg-card featured reveal reveal-delay-1">
+      <div class="pkg-featured-badge">Most Popular</div>
+      <div class="pkg-icon">🌿</div>
+      <div class="pkg-name">Lawn + Hall</div>
+      <div class="pkg-price">From ₹99,000</div>
+      <div class="pkg-divider"></div>
+      <ul class="pkg-features">
+        <li>Lawn + Hall combo package</li>
+        <li>1200 floating capacity</li>
+        <li>Open lawn for ceremonies</li>
+        <li>Beautiful lighting setup</li>
+        <li>Both veg & non-veg menus</li>
+        <li>External catering allowed</li>
+        <li>Full decoration support</li>
+      </ul>
+      <a href="#contact" class="pkg-cta">Book This Space</a>
+    </div>
+    <div class="pkg-card reveal reveal-delay-2">
+      <div class="pkg-icon">🎉</div>
+      <div class="pkg-name">Custom Event</div>
+      <div class="pkg-price">Custom Pricing</div>
+      <div class="pkg-divider"></div>
+      <ul class="pkg-features">
+        <li>Corporate & club events</li>
+        <li>Kitty & social gatherings</li>
+        <li>Birthday & anniversary</li>
+        <li>Flexible layout options</li>
+        <li>Tailored décor themes</li>
+        <li>Custom catering packages</li>
+      </ul>
+      <a href="#contact" class="pkg-cta">Talk to Us</a>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section id="testimonials">
+  <div class="test-header reveal">
+    <p class="section-tag">Guest Reviews</p>
+    <h2 class="section-title">Voices of <em>Our Guests</em></h2>
+    <div class="divider-gold"></div>
+  </div>
+  <div class="test-grid">
+    <div class="test-card reveal">
+      <div class="quote-mark">"</div>
+      <p class="test-text">What a lovely place for a good gathering. Each and every detail has been taken care of so beautifully. Ample space for more than 600 guests — truly stunning!</p>
+      <div class="test-author">
+        <div class="test-avatar">C</div>
+        <div>
+          <div class="test-name">Chetan Varshney</div>
+          <div class="test-stars">★★★★★</div>
+        </div>
+      </div>
+    </div>
+    <div class="test-card reveal reveal-delay-1">
+      <div class="quote-mark">"</div>
+      <p class="test-text">Best place to celebrate your function. The management was incredibly supportive and the ambience was absolutely beautiful. Highly recommended for weddings!</p>
+      <div class="test-author">
+        <div class="test-avatar">H</div>
+        <div>
+          <div class="test-name">Himanshu Singh</div>
+          <div class="test-stars">★★★★★</div>
+        </div>
+      </div>
+    </div>
+    <div class="test-card reveal reveal-delay-2">
+      <div class="quote-mark">"</div>
+      <p class="test-text">We hosted our daughter's ring ceremony here and it was magical. The newly renovated interiors are breathtaking and the staff is so warm and professional.</p>
+      <div class="test-author">
+        <div class="test-avatar">R</div>
+        <div>
+          <div class="test-name">Rekha Agarwal</div>
+          <div class="test-stars">★★★★★</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-wrap">
+    <div class="contact-info reveal">
+      <p class="section-tag">Get In Touch</p>
+      <h2 class="section-title">Let's Plan Your <em>Dream Event</em></h2>
+      <div class="divider-gold"></div>
+      <p>Reach out to our team to check availability, get a customised quote, or simply come visit the newly renovated Ekta Farms in person.</p>
+
+      <div class="contact-item">
+        <div class="contact-icon">📞</div>
+        <div>
+          <div class="contact-label">Phone / WhatsApp</div>
+          <div class="contact-val">
+            <a href="tel:+918279421446">+91 82794 21446</a><br>
+            <a href="tel:+919319339039">+91 93193 39039</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="contact-item">
+        <div class="contact-icon">📍</div>
+        <div>
+          <div class="contact-label">Address</div>
+          <div class="contact-val">Padiyawali, Near D.P.S. Junior Wing,<br>Agra Road, Aligarh – 202001, U.P.</div>
+        </div>
+      </div>
+
+      <div class="contact-item">
+        <div class="contact-icon">🕐</div>
+        <div>
+          <div class="contact-label">Open Hours</div>
+          <div class="contact-val">Daily: 9:00 AM – 9:00 PM<br>Available for site visits by appointment</div>
+        </div>
+      </div>
+
+      <div class="social-row">
+        <a href="https://www.instagram.com/ekta.farms?igsh=bGNtZjJvZm5xdmp4" target="_blank" rel="noopener" class="social-btn">
+          📷 Instagram
+        </a>
+        <a href="https://www.facebook.com/p/EKTA-FARMS-100057040106616/" target="_blank" rel="noopener" class="social-btn">
+          📘 Facebook
+        </a>
+        <a href="https://wa.me/918279421446" target="_blank" rel="noopener" class="social-btn">
+          💬 WhatsApp
+        </a>
+      </div>
+
+      <!-- Map -->
+      <div class="map-wrap" style="margin-top:36px;">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3523.2!2d78.0876!3d27.8974!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3974a5a1b1b1b1b1%3A0x1!2sEkta+Farms%2C+Agra+Road%2C+Aligarh%2C+Uttar+Pradesh+202001!5e0!3m2!1sen!2sin!4v1"
+          allowfullscreen=""
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          title="Ekta Farms Location">
+        </iframe>
+      </div>
+    </div>
+
+    <div class="contact-form reveal reveal-delay-2">
+      <div class="form-title">Send an Enquiry</div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Your Name</label>
+          <input type="text" placeholder="Full name" id="f-name"/>
+        </div>
+        <div class="form-group">
+          <label>Phone Number</label>
+          <input type="tel" placeholder="+91 XXXXX XXXXX" id="f-phone"/>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Email Address</label>
+        <input type="email" placeholder="your@email.com" id="f-email"/>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Event Type</label>
+          <select id="f-event">
+            <option value="">Select event</option>
+            <option>Wedding Ceremony</option>
+            <option>Ring Ceremony</option>
+            <option>Birthday Party</option>
+            <option>Kitty Party</option>
+            <option>Corporate Event</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Preferred Date</label>
+          <input type="date" id="f-date"/>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Expected Guest Count</label>
+        <select id="f-guests">
+          <option value="">Select count</option>
+          <option>Up to 200</option>
+          <option>200 – 400</option>
+          <option>400 – 600</option>
+          <option>600 – 800</option>
+          <option>800 – 1000</option>
+          <option>1000+</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Message</label>
+        <textarea placeholder="Tell us about your event requirements..." id="f-message"></textarea>
+      </div>
+      <button class="form-submit" onclick="submitForm()">Send Enquiry →</button>
+      <div class="form-success" id="formSuccess">
+        ✓ Thank you! Your enquiry has been sent. Our team will reach out within 24 hours.
+      </div>
+      <div class="form-error" id="formError" style="display:none;padding:14px;margin-top:12px;background:rgba(200,60,60,.08);border:1px solid rgba(200,60,60,.3);color:#f08080;font-size:.83rem;text-align:center;">
+        ⚠ Something went wrong. Please call us directly at +91 82794 21446.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <a href="#hero" class="nav-logo">Ekta <span>Farms</span></a>
+      <p>Multiple Functions, One Destination. Aligarh's most beloved banquet & event venue — newly renovated, endlessly beautiful.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Quick Links</h4>
+      <ul>
+        <li><a href="#about">About the Venue</a></li>
+        <li><a href="#events">Events We Host</a></li>
+        <li><a href="#walkthrough">Photo Gallery</a></li>
+        <li><a href="#packages">Packages & Pricing</a></li>
+        <li><a href="#testimonials">Guest Reviews</a></li>
+        <li><a href="#contact">Book Now</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Contact</h4>
+      <ul>
+        <li><a href="tel:+918279421446">+91 82794 21446</a></li>
+        <li><a href="tel:+919319339039">+91 93193 39039</a></li>
+        <li><a href="https://wa.me/918279421446" target="_blank">WhatsApp Us</a></li>
+        <li><a href="https://www.instagram.com/ekta.farms" target="_blank">@ekta.farms</a></li>
+        <li style="color:rgba(253,246,232,.4);font-size:.8rem;padding-top:6px;">Agra Road, Abad Nagar,<br>Aligarh – 202001, U.P.</li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 Ekta Farms, Aligarh. All rights reserved.</span>
+    <span>Designed with ♥ for your grandest celebrations</span>
+  </div>
+</footer>
+
+<script>
+  // Custom Cursor
+  const cursor = document.getElementById('cursor');
+  const ring = document.getElementById('cursor-ring');
+  let mx = 0, my = 0, rx = 0, ry = 0;
+  document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; cursor.style.left = mx+'px'; cursor.style.top = my+'px'; });
+  function animRing() { rx += (mx-rx)*.14; ry += (my-ry)*.14; ring.style.left = rx+'px'; ring.style.top = ry+'px'; requestAnimationFrame(animRing); }
+  animRing();
+
+  // Nav scroll
+  const nav = document.getElementById('mainNav');
+  window.addEventListener('scroll', () => { nav.classList.toggle('scrolled', window.scrollY > 60); });
+
+  // Reveal on scroll
+  const reveals = document.querySelectorAll('.reveal');
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if(e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+  }, { threshold: 0.12 });
+  reveals.forEach(r => obs.observe(r));
+
+  // Video play
+  const poster = document.getElementById('playPoster');
+  const iframe = document.getElementById('ytVideo');
+  poster.addEventListener('click', () => {
+    iframe.src = iframe.dataset.src;
+    poster.classList.add('hidden');
+  });
+
+  // Form submit — Formspree email + WhatsApp
+  async function submitForm() {
+    const name    = document.getElementById('f-name').value.trim();
+    const phone   = document.getElementById('f-phone').value.trim();
+    const email   = document.getElementById('f-email').value.trim();
+    const event   = document.getElementById('f-event').value;
+    const date    = document.getElementById('f-date').value;
+    const guests  = document.getElementById('f-guests').value;
+    const message = document.getElementById('f-message').value.trim();
+
+    if(!name || !phone) { alert('Please enter your name and phone number.'); return; }
+
+    const btn = document.querySelector('.form-submit');
+    btn.textContent = 'Sending…';
+    btn.disabled = true;
+
+    // ── 1. Send email via Formspree ──
+    try {
+      const res = await fetch('https://formspree.io/f/xgvkwdol', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify({
+          name, phone, email,
+          event_type: event,
+          preferred_date: date,
+          guest_count: guests,
+          message,
+          _subject: `New Enquiry from ${name} – Ekta Farms`
+        })
+      });
+
+      if(res.ok) {
+        document.getElementById('formSuccess').style.display = 'block';
+        btn.textContent = '✓ Enquiry Sent';
+        btn.style.background = '#4a7c59';
+        btn.style.color = '#fff';
+
+        // ── 2. Also open WhatsApp with pre-filled message ──
+        const wa = `Hello Ekta Farms! 🙏\n\nI'd like to enquire about booking your venue.\n\n*Name:* ${name}\n*Phone:* ${phone}\n*Event:* ${event || 'N/A'}\n*Date:* ${date || 'N/A'}\n*Guests:* ${guests || 'N/A'}\n*Message:* ${message || 'N/A'}`;
+        setTimeout(() => {
+          window.open(`https://wa.me/918279421446?text=${encodeURIComponent(wa)}`, '_blank');
+        }, 800);
+
+      } else {
+        throw new Error('Formspree error');
+      }
+    } catch(err) {
+      document.getElementById('formError').style.display = 'block';
+      btn.textContent = 'Send Enquiry →';
+      btn.disabled = false;
+    }
+  }
+</script>
+</body>
+</html>
