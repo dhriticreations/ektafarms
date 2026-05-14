@@ -1029,52 +1029,16 @@
     </div>
   </div>
 
-  <!-- ── DRAG & DROP UPLOADER ── -->
-  <div class="uploader-wrap reveal" style="max-width:1200px;margin:32px auto 0;">
-    <div class="uploader-box" id="dropZone">
-      <div class="uploader-icon">📁</div>
-      <div class="uploader-title">Drop Your Farm Photos Here</div>
-      <div class="uploader-sub">or click to browse from phone / computer</div>
-      <input type="file" id="fileInput" multiple accept="image/*" style="display:none"/>
-      <button class="uploader-btn" onclick="document.getElementById('fileInput').click()">Choose Photos</button>
-    </div>
-    <div class="uploaded-preview" id="uploadedPreview"></div>
-    <p class="uploader-note">⚠️ These previews are temporary (session only). To make them permanent, save photos in an <code>images/</code> folder and update the <code>src</code> attributes in the HTML.</p>
-  </div>
-
   <!-- ── INSTAGRAM LIVE FEED ── -->
   <div style="max-width:1200px;margin:64px auto 0;" class="reveal">
     <div style="text-align:center;margin-bottom:32px;">
       <p class="section-tag" style="justify-content:center;"><span style="width:0"></span>Live from Instagram</p>
-      <h3 style="font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:300;">
-        Latest from <em style="color:var(--gold);font-style:italic;">@ekta.farms</em>
-      </h3>
       <div class="divider-gold" style="margin:16px auto 0;"></div>
     </div>
 
     <!-- ELFSIGHT INSTAGRAM FEED WIDGET -->
-    <!-- 📋 SETUP STEPS (5 minutes, free):
-         1. Go to https://elfsight.com/instagram-feed-widget/
-         2. Click "Create Widget" → sign up free
-         3. Connect your @ekta.farms Instagram account
-         4. Copy the embed code they give you
-         5. Replace the placeholder below with that code -->
-    <div class="insta-feed-placeholder" id="elfsightWidget">
-      <div class="insta-placeholder-inner">
-        <div style="font-size:2.5rem;margin-bottom:12px;">📸</div>
-        <div style="font-family:'Cormorant Garamond',serif;font-size:1.5rem;color:var(--gold);margin-bottom:10px;">Instagram Feed</div>
-        <p style="font-size:.85rem;color:rgba(253,246,232,.6);line-height:1.8;max-width:420px;margin:0 auto 20px;">
-          Your live Instagram posts from <strong style="color:var(--gold-light);">@ekta.farms</strong> will appear here automatically — decoration photos, event reels, renovation updates and more.
-        </p>
-        <a href="https://elfsight.com/instagram-feed-widget/" target="_blank" rel="noopener" class="btn-primary" style="display:inline-block;font-size:.75rem;">
-          Set Up Instagram Feed (Free) →
-        </a>
-        <p style="margin-top:14px;font-size:.72rem;color:rgba(253,246,232,.35);">
-          After setup, replace this block with your Elfsight embed code
-        </p>
-      </div>
-    </div>
-    <!-- PASTE YOUR ELFSIGHT CODE HERE AFTER SETUP ↑ -->
+    <script src="https://elfsightcdn.com/platform.js" async></script>
+<div class="elfsight-app-fd4bc839-e555-4660-95ec-f428ae2176b7" data-elfsight-app-lazy></div>
 
     <div style="text-align:center;margin-top:28px;">
       <a href="https://www.instagram.com/ekta.farms?igsh=bGNtZjJvZm5xdmp4" target="_blank" rel="noopener" class="btn-outline" style="display:inline-block;">
@@ -1107,25 +1071,6 @@
       </div>
     </div>
     <p class="video-caption" style="margin-bottom:56px;">Cinematic walkthrough of Ekta Farm, Aligarh · Agra Road</p>
-
-    <!-- ── INSTAGRAM REEL EMBED ── -->
-    <div style="margin-bottom:16px;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);opacity:.7;">📱 Instagram Reel</div>
-    <div class="reel-placeholder reveal" id="reelArea">
-      <div class="insta-placeholder-inner" style="padding:40px 24px;">
-        <div style="font-size:2rem;margin-bottom:10px;">🎬</div>
-        <div style="font-family:'Cormorant Garamond',serif;font-size:1.4rem;color:var(--gold);margin-bottom:8px;">Add an Instagram Reel</div>
-        <p style="font-size:.83rem;color:rgba(253,246,232,.6);line-height:1.7;max-width:380px;margin:0 auto 18px;">
-          Share the link to any Instagram Reel from <strong style="color:var(--gold-light);">@ekta.farms</strong> and it will be embedded here.
-        </p>
-        <div style="display:flex;gap:10px;max-width:440px;margin:0 auto;">
-          <input type="text" id="reelInput" placeholder="Paste Instagram Reel URL here..."
-            style="flex:1;padding:11px 14px;background:rgba(201,168,76,.06);border:1px solid rgba(201,168,76,.25);color:var(--cream);font-family:'Jost',sans-serif;font-size:.84rem;outline:none;"/>
-          <button onclick="embedReel()" style="padding:11px 20px;background:var(--gold);color:var(--dark);border:none;font-family:'Jost',sans-serif;font-size:.78rem;font-weight:600;letter-spacing:.1em;cursor:pointer;">Embed</button>
-        </div>
-        <p style="margin-top:10px;font-size:.7rem;color:rgba(253,246,232,.3);">e.g. https://www.instagram.com/reel/ABC123/</p>
-      </div>
-    </div>
-  </div>
 </section>
 
 <!-- PACKAGES -->
@@ -1139,14 +1084,14 @@
     <div class="pkg-card reveal">
       <div class="pkg-icon">🏛️</div>
       <div class="pkg-name">Banquet Hall</div>
-      <div class="pkg-price">₹800 – ₹900 Per Plate</div>
+      <div class="pkg-price">₹999 – ₹3999 Per Plate</div>
       <div class="pkg-divider"></div>
       <ul class="pkg-features">
         <li>Capacity: 800 seated guests</li>
         <li>800+ floating guests</li>
         <li>Air-conditioned indoor space</li>
         <li>Veg & non-veg cuisine</li>
-        <li>40 car + 80 bike parking</li>
+        <li>100 car + 200 bike parking</li>
         <li>Dedicated event manager</li>
       </ul>
       <a href="#contact" class="pkg-cta">Enquire Now</a>
@@ -1155,7 +1100,7 @@
       <div class="pkg-featured-badge">Most Popular</div>
       <div class="pkg-icon">🌿</div>
       <div class="pkg-name">Lawn + Hall</div>
-      <div class="pkg-price">From ₹99,000</div>
+      <div class="pkg-price">From ₹2,99,000</div>
       <div class="pkg-divider"></div>
       <ul class="pkg-features">
         <li>Lawn + Hall combo package</li>
@@ -1273,7 +1218,7 @@
         <a href="https://www.facebook.com/p/EKTA-FARMS-100057040106616/" target="_blank" rel="noopener" class="social-btn">
           📘 Facebook
         </a>
-        <a href="https://wa.me/918279421446" target="_blank" rel="noopener" class="social-btn">
+        <a href="https://wa.me/919319339039" target="_blank" rel="noopener" class="social-btn">
           💬 WhatsApp
         </a>
       </div>
@@ -1381,7 +1326,7 @@
     </div>
   </div>
   <div class="footer-bottom">
-    <span>© 2025 Ekta Farms, Aligarh. All rights reserved.</span>
+    <span>© 2026 Ekta Farms, Aligarh. All rights reserved.</span>
     <span>Designed with ♥ for your grandest celebrations</span>
   </div>
 </footer>
@@ -1432,7 +1377,7 @@
 
     // ── 1. Send email via Formspree ──
     try {
-      const res = await fetch('https://formspree.io/f/xgvkwdol', {
+      const res = await fetch('https://formspree.io/f/xvzlndae', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
         body: JSON.stringify({
@@ -1454,7 +1399,7 @@
         // ── 2. Also open WhatsApp with pre-filled message ──
         const wa = `Hello Ekta Farms! 🙏\n\nI'd like to enquire about booking your venue.\n\n*Name:* ${name}\n*Phone:* ${phone}\n*Event:* ${event || 'N/A'}\n*Date:* ${date || 'N/A'}\n*Guests:* ${guests || 'N/A'}\n*Message:* ${message || 'N/A'}`;
         setTimeout(() => {
-          window.open(`https://wa.me/918279421446?text=${encodeURIComponent(wa)}`, '_blank');
+          window.open(`https://wa.me/919899123855?text=${encodeURIComponent(wa)}`, '_blank');
         }, 800);
 
       } else {
