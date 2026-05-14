@@ -111,7 +111,8 @@
       position: absolute; inset: 0;
       background: 
         radial-gradient(ellipse 80% 60% at 50% 40%, rgba(201,168,76,.07) 0%, transparent 65%),
-        url('https://images.unsplash.com/photo-1519167758481-83f550bb49b3?w=1800&q=80') center/cover no-repeat;
+        /* url('https://images.unsplash.com/photo-1519167758481-83f550bb49b3?w=1800&q=80') center/cover no-repeat; */
+        url('images/front-elevation.png') center/cover no-repeat;
       filter: brightness(.35);
       transform: scale(1.04);
       animation: heroZoom 14s ease-in-out infinite alternate;
@@ -446,7 +447,8 @@
     }
     .video-frame .play-poster {
       position: absolute; inset: 0;
-      background: url('https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?w=900&q=80') center/cover no-repeat;
+      /* background: url('https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?w=900&q=80') center/cover no-repeat; */
+      background: url('images/front-elevation.png') center/cover no-repeat;
       display: flex; align-items: center; justify-content: center;
       cursor: pointer;
       transition: opacity .4s;
@@ -836,7 +838,9 @@
 
 <!-- NAV -->
 <nav id="mainNav">
-  <a href="#hero" class="nav-logo">Ekta <span>Farms</span></a>
+  <a href="#hero" class="nav-logo">
+    <img src="images/logo.png" alt="Ekta Farms Logo">
+  </a>
   <ul class="nav-links">
     <li><a href="#about">About</a></li>
     <li><a href="#events">Events</a></li>
@@ -876,7 +880,8 @@
 <section id="about">
   <div class="about-grid">
     <div class="about-img-wrap reveal">
-      <img src="https://images.unsplash.com/photo-1561484930-998b6a7b22e8?w=700&q=80" alt="Ekta Farms Venue" loading="lazy"/>
+      <!-- <img src="https://images.unsplash.com/photo-1561484930-998b6a7b22e8?w=700&q=80" alt="Ekta Farms Venue" loading="lazy"/> -->
+      <img src="images/hall.png" alt="Ekta Farms Venue" loading="lazy"/>
       <div class="img-badge">
         <div class="num">2+</div>
         <div class="lbl">Event<br>Spaces</div>
@@ -915,7 +920,8 @@
   </div>
   <div class="events-grid">
     <div class="event-card reveal">
-      <img src="https://images.unsplash.com/photo-1519741497674-611481863552?w=600&q=80" alt="Wedding" loading="lazy"/>
+      <!-- <img src="https://images.unsplash.com/photo-1519741497674-611481863552?w=600&q=80" alt="Wedding" loading="lazy"/> -->
+      <img src="images/hall-decor.png" alt="Wedding" loading="lazy"/>
       <div class="card-overlay"></div>
       <div class="card-content">
         <div class="card-icon">💍</div>
@@ -935,7 +941,8 @@
       </div>
     </div>
     <div class="event-card reveal reveal-delay-2">
-      <img src="https://images.unsplash.com/photo-1511578314322-379afb476865?w=600&q=80" alt="Corporate" loading="lazy"/>
+      <!-- <img src="https://images.unsplash.com/photo-1511578314322-379afb476865?w=600&q=80" alt="Corporate" loading="lazy"/> -->
+      <img src="images/hall-sitting.png" alt="Corporate" loading="lazy"/>
       <div class="card-overlay"></div>
       <div class="card-content">
         <div class="card-icon">💼</div>
@@ -945,7 +952,8 @@
       </div>
     </div>
     <div class="event-card reveal">
-      <img src="https://images.unsplash.com/photo-1469371670807-013ccf25f16a?w=600&q=80" alt="Ring Ceremony" loading="lazy"/>
+      <!-- <img src="https://images.unsplash.com/photo-1469371670807-013ccf25f16a?w=600&q=80" alt="Ring Ceremony" loading="lazy"/> -->
+      <img src="images/hall-stage-decor-vertical.png" alt="Ring Ceremony" loading="lazy"/>
       <div class="card-overlay"></div>
       <div class="card-content">
         <div class="card-icon">💎</div>
@@ -955,7 +963,8 @@
       </div>
     </div>
     <div class="event-card reveal reveal-delay-1">
-      <img src="https://images.unsplash.com/photo-1470753937643-efeb931202a9?w=600&q=80" alt="Kitty Party" loading="lazy"/>
+     <!-- <img src="https://images.unsplash.com/photo-1470753937643-efeb931202a9?w=600&q=80" alt="Kitty Party" loading="lazy"/> -->
+      <img src="images/hall-stage-decor.png" alt="Kitty Party" loading="lazy"/>
       <div class="card-overlay"></div>
       <div class="card-content">
         <div class="card-icon">🌸</div>
@@ -965,7 +974,8 @@
       </div>
     </div>
     <div class="event-card reveal reveal-delay-2">
-      <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=600&q=80" alt="Catering" loading="lazy"/>
+      <!-- <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=600&q=80" alt="Catering" loading="lazy"/> -->
+      <img src="images/hall-catering.png" alt="Catering" loading="lazy"/>
       <div class="card-overlay"></div>
       <div class="card-content">
         <div class="card-icon">🍽️</div>
@@ -990,11 +1000,6 @@
 
   <!-- ── PHOTO GALLERY (replace src with your own images) ── -->
   <div class="gallery-mosaic" id="photoGallery">
-    <!-- 💡 HOW TO ADD YOUR OWN PHOTOS:
-         1. Create a folder named "images" next to this HTML file
-         2. Copy your farm photos into that folder
-         3. Replace each src below, e.g.: src="images/hall-main.jpg"
-         You can also drag & drop photos using the uploader below ↓ -->
     <div class="g-item reveal">
       <img src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=800&q=80" alt="Banquet Hall" loading="lazy" id="photo-1"/>
       <div class="g-overlay"><span>Grand Hall</span></div>
